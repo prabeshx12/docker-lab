@@ -9,22 +9,15 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
-                sh 'docker build -t backend-app ./backend'
+                sh 'echo "Build stage completed"'
             }
         }
 
-        stage('Stop Old Container') {
+        stage('Deploy using Ansible') {
             steps {
-                sh 'docker stop backend || true'
-                sh 'docker rm backend || true'
-            }
-        }
-
-        stage('Run Container') {
-            steps {
-                sh 'docker run -d -p 5000:5000 --name backend backend-app'
+                sh 'ansible-playbook -i ansible-deploy/inventory ansible-deploy/deploy.yml'
             }
         }
 
