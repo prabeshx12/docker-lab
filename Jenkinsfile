@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/prabeshx12/docker-lab.git'
+                git branch: 'main', url: 'https://github.com/prabeshx12/docker-lab.git'
             }
         }
 
